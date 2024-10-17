@@ -1,0 +1,1 @@
+The Expense Tracker app offers real-time balance updates, income/expense categories, and dynamic transaction editing and deletion. It includes sorting and category-based filtering which is not done yet.
