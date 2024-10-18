@@ -11,6 +11,8 @@ export default function Tracker() {
   const [incomeItems, setIncomeItems] = useState([]);
   const [expenseItemToUpdate, setExpenseItemToUpdate] = useState(null);
   const [incomeItemToUpdate, setIncomeItemToUpdate] = useState(null);
+  const [selectedIncomeCategory, setSelectedIncomeCategory] = useState([]);
+  const [selectedExpenseCategory, setSelectedExpenseCategory] = useState([]);
 
   const toggleToIncome = () => setIsExpense(false);
   const toggleToExpense = () => setIsExpense(true);
@@ -33,8 +35,9 @@ export default function Tracker() {
     console.log(expenseItemToDelete);
   };
 
-  const handleEditExpenseItem = (incomeItemToEdit) => {
-    setExpenseItemToUpdate(incomeItemToEdit);
+  const handleEditExpenseItem = (expenseItemToEdit) => {
+    setIsExpense(true);
+    setExpenseItemToUpdate(expenseItemToEdit);
   };
 
   const handleIncomeItems = (newIncome, isUpdate = false) => {
@@ -55,9 +58,55 @@ export default function Tracker() {
     console.log(incomeItemToDelete);
   };
 
-  const handleEditIncomeItem = (expenseItemToEdit) => {
-    setIncomeItemToUpdate(expenseItemToEdit);
+  const handleEditIncomeItem = (incomeItemToEdit) => {
+    setIsExpense(false);
+    setIncomeItemToUpdate(incomeItemToEdit);
   };
+
+  const sortExpenseLowToHigh = () => {
+    const sortedExpenses = [...expenseItems].sort(
+      (a, b) => a.amount - b.amount
+    );
+    setExpenseItems(sortedExpenses);
+  };
+
+  const sortExpenseHighToLow = () => {
+    const sortedExpenses = [...expenseItems].sort(
+      (a, b) => b.amount - a.amount
+    );
+    setExpenseItems(sortedExpenses);
+  };
+
+  const sortIncomeLowToHigh = () => {
+    const sortedIncome = [...incomeItems].sort((a, b) => a.amount - b.amount);
+    setIncomeItems(sortedIncome);
+  };
+
+  const sortIncomeHighToLow = () => {
+    const sortedIncome = [...incomeItems].sort((a, b) => b.amount - a.amount);
+    setIncomeItems(sortedIncome);
+  };
+
+  const handleIncomeCategoryFilter = (categories) => {
+    setSelectedIncomeCategory(categories);
+  };
+
+  // Filtered income items based on selected categories (updated to work with array)
+  const filteredIncomeItems = selectedIncomeCategory.length
+    ? incomeItems.filter((item) =>
+        selectedIncomeCategory.includes(item.category)
+      )
+    : incomeItems;
+
+  const handleExpenseCategoryFilter = (categories) => {
+    setSelectedExpenseCategory(categories);
+  };
+
+  const filteredExpenseItems = selectedExpenseCategory.length
+    ? expenseItems.filter((item) =>
+        selectedExpenseCategory.includes(item.category)
+      )
+    : expenseItems;
 
   let totalExpense = 0;
   expenseItems.map((i) => (totalExpense = Number(i.amount) + totalExpense));
@@ -95,15 +144,23 @@ export default function Tracker() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
             <IncomeList
-              incomeItems={incomeItems}
+              incomeItems={filteredIncomeItems}
               onIncomeDelete={handleDeleteIncomeItem}
               onIncomeEdit={handleEditIncomeItem}
+              onSortIncomeLowToHigh={sortIncomeLowToHigh}
+              onSortIncomeHighToLow={sortIncomeHighToLow}
+              onIncomeCategoryFilter={handleIncomeCategoryFilter}
+              selectedIncomeCategory={selectedIncomeCategory}
             />
 
             <ExpenseList
-              expenseItems={expenseItems}
+              expenseItems={filteredExpenseItems}
               onExpenseDelete={handleDeleteExpenseItem}
               onExpenseEdit={handleEditExpenseItem}
+              onSortExpenseLowToHigh={sortExpenseLowToHigh}
+              onSortExpenseHighToLow={sortExpenseHighToLow}
+              onExpenseCategoryFilter={handleExpenseCategoryFilter}
+              selectedExpenseCategory={selectedExpenseCategory}
             />
           </div>
         </div>

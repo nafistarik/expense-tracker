@@ -1,7 +1,32 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-export default function IncomeFiltering() {
+export default function IncomeFiltering({
+  selectedIncomeCategory,
+  onIncomeCategoryFilter,
+}) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState(
+    selectedIncomeCategory || []
+  );
+
   const handleIncomeFilterToggle = () => setIsOpen(!isOpen);
+
+  const handleCategoryChange = (category) => {
+    let updatedCategories;
+
+    if (selectedCategories.includes(category)) {
+      // Remove the category if it's already selected
+      updatedCategories = selectedCategories.filter((cat) => cat !== category);
+    } else {
+      // Add the category if it's not selected
+      updatedCategories = [...selectedCategories, category];
+    }
+
+    setSelectedCategories(updatedCategories);
+    onIncomeCategoryFilter(updatedCategories); // Notify parent of the selected categories
+    console.log(updatedCategories);
+  };
+
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -52,7 +77,8 @@ export default function IncomeFiltering() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-1"
+                checked={selectedCategories.includes("Salary")}
+                onChange={() => handleCategoryChange("Salary")}
               />
               <span className="ml-2">Salary</span>
             </label>
@@ -60,7 +86,8 @@ export default function IncomeFiltering() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-2"
+                checked={selectedCategories.includes("Outsourcing")}
+                onChange={() => handleCategoryChange("Outsourcing")}
               />
               <span className="ml-2">Outsourcing</span>
             </label>
@@ -68,16 +95,17 @@ export default function IncomeFiltering() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-3"
+                checked={selectedCategories.includes("Bond")}
+                onChange={() => handleCategoryChange("Bond")}
               />
               <span className="ml-2">Bond</span>
             </label>
-
             <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-3"
+                checked={selectedCategories.includes("Dividend")}
+                onChange={() => handleCategoryChange("Dividend")}
               />
               <span className="ml-2">Dividend</span>
             </label>

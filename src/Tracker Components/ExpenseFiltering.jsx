@@ -1,7 +1,31 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-export default function ExpenseFiltering() {
+export default function ExpenseFiltering({
+  onExpenseCategoryFilter,
+  selectedExpenseCategory,
+}) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState(
+    selectedExpenseCategory || []
+  );
+
   const handleExpenseFilterToggle = () => setIsOpen(!isOpen);
+
+  const handleCategoryChange = (category) => {
+    let updatedCategories;
+
+    if (selectedCategories.includes(category)) {
+      // Remove the category if it's already selected
+      updatedCategories = selectedCategories.filter((cat) => cat !== category);
+    } else {
+      // Add the category if it's not selected
+      updatedCategories = [...selectedCategories, category];
+    }
+
+    setSelectedCategories(updatedCategories);
+    onExpenseCategoryFilter(updatedCategories); // Notify parent of the selected categories
+    console.log(updatedCategories);
+  };
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -53,7 +77,8 @@ export default function ExpenseFiltering() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-1"
+                checked={selectedCategories.includes("Education")}
+                onChange={() => handleCategoryChange("Education")}
               />
               <span className="ml-2">Education</span>
             </label>
@@ -61,7 +86,8 @@ export default function ExpenseFiltering() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-2"
+                checked={selectedCategories.includes("Food")}
+                onChange={() => handleCategoryChange("Food")}
               />
               <span className="ml-2">Food</span>
             </label>
@@ -69,9 +95,55 @@ export default function ExpenseFiltering() {
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-                id="filter-option-3"
+                checked={selectedCategories.includes("Health")}
+                onChange={() => handleCategoryChange("Health")}
               />
               <span className="ml-2">Health</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                checked={selectedCategories.includes("Bill")}
+                onChange={() => handleCategoryChange("Bill")}
+              />
+              <span className="ml-2">Bill</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                checked={selectedCategories.includes("Insurance")}
+                onChange={() => handleCategoryChange("Insurance")}
+              />
+              <span className="ml-2">Insurance</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                checked={selectedCategories.includes("Tax")}
+                onChange={() => handleCategoryChange("Tax")}
+              />
+              <span className="ml-2">Tax</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                checked={selectedCategories.includes("Transport")}
+                onChange={() => handleCategoryChange("Transport")}
+              />
+              <span className="ml-2">Transport</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                checked={selectedCategories.includes("Telephone")}
+                onChange={() => handleCategoryChange("Telephone")}
+              />
+              <span className="ml-2">Telephone</span>
             </label>
           </div>
         </div>

@@ -8,6 +8,10 @@ export default function IncomeList({
   incomeItems,
   onIncomeDelete,
   onIncomeEdit,
+  onSortIncomeLowToHigh,
+  onSortIncomeHighToLow,
+  selectedIncomeCategory,
+  onIncomeCategoryFilter,
 }) {
   return (
     <div className="border rounded-md relative">
@@ -21,8 +25,14 @@ export default function IncomeList({
           </div>
         </div>
         <div>
-          <IncomeSorting />
-          <IncomeFiltering />
+          <IncomeSorting
+            onSortIncomeLowToHigh={onSortIncomeLowToHigh}
+            onSortIncomeHighToLow={onSortIncomeHighToLow}
+          />
+          <IncomeFiltering
+            selectedIncomeCategory={selectedIncomeCategory}
+            onIncomeCategoryFilter={onIncomeCategoryFilter}
+          />
         </div>
       </div>
 
@@ -35,7 +45,7 @@ export default function IncomeList({
             onIncomeEdit={onIncomeEdit}
           />
         ))}
-        <IncomeItem />
+        {/* <IncomeItem /> */}
       </div>
     </div>
   );

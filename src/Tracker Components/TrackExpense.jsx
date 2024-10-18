@@ -21,7 +21,6 @@ export default function TrackExpense({
     amount: 0,
     date: "",
   });
-
   const handleExpenseForm = (e) => {
     e.preventDefault();
     if (newExpense.id) {
