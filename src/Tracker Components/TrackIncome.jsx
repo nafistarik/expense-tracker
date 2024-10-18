@@ -44,6 +44,7 @@ export default function TrackIncome({
       amount: 0,
       date: "",
     });
+    setIncomeItemToUpdate(null);
   };
 
   useEffect(() => {
@@ -90,7 +91,7 @@ export default function TrackIncome({
               value={newIncome.category}
               onChange={handleCategoryChange}
               autoComplete="category-name"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             >
               <option>Salary</option>
               <option>Outsourcing</option>
@@ -116,7 +117,7 @@ export default function TrackIncome({
               onChange={handleAmountChange}
               autoComplete="off"
               placeholder="12931"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -137,7 +138,7 @@ export default function TrackIncome({
               onChange={handleDateChange}
               autoComplete="off"
               placeholder="12931"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 px-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -147,7 +148,7 @@ export default function TrackIncome({
           type="submit"
           className="mt-6 rounded-md bg-teal-600 px-8 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 w-full"
         >
-          {incomeItemToUpdate ? "Update" : "Save"}
+          {incomeItemToUpdate ? "Update Income" : "Add Income"}
         </button>
       </form>
     </div>

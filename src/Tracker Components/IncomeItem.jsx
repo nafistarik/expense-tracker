@@ -15,7 +15,7 @@ export default function IncomeItem({
       </div>
       <div className="flex items-center gap-2">
         <p className="text-base font-semibold text-gray-600 transition-all group-hover:-translate-x-14">
-          {incomeItem.amount}
+          BDT {incomeItem.amount}
         </p>
 
         <div className="translate-x-5 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 absolute right-0 top-1/2 -translate-y-1/2 transition-all">

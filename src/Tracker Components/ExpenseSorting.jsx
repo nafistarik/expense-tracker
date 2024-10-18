@@ -41,7 +41,7 @@ export default function ExpenseSorting({
 
       {isOpen ? (
         <div
-          className="absolute z-10 mt-2 left-0 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className="absolute z-10 mt-2 right-0 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button2"
