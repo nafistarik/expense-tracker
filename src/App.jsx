@@ -1,10 +1,10 @@
-import Header from "./Header";
+// import Header from "./Header";
 import Tracker from "./Tracker";
 
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Tracker />
     </>
   );
